@@ -6,9 +6,9 @@ const taskInput = document.querySelector('#task');
 const submitBtn = document.querySelector('#submit-btn');
 
 loadEventListeners();
-populateList();
 
 function loadEventListeners() {
+  document.addEventListener('DOMContentLoaded', populateList)
   form.addEventListener('submit', addTask);
   taskList.addEventListener('click', removeTask);
   clearBtn.addEventListener('click', clearTasks);
