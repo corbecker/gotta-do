@@ -28,9 +28,14 @@ function addTask(e){
 }
 
 function removeTask(e){
+  let taskListItem = e.target.parentElement.parentElement;
+  let taskList = [...taskListItem.parentNode.children];
+  let taskIndex = taskList.indexOf(taskListItem);
+  removeFromLocalStorage(taskIndex, taskList.length === 1 ? true : false);
+
   //event delegation
-  if(e.target.parentElement.parentElement.classList.contains('collection-item')){
-    e.target.parentElement.parentElement.remove();
+  if(taskListItem.classList.contains('collection-item')){
+    taskListItem.remove();
   }
   
 }
@@ -58,7 +63,15 @@ function addToLocalStorage(task){
   }
   tasks.push(task);
   localStorage.setItem('tasks', JSON.stringify(tasks));
+}
 
+function removeFromLocalStorage(index, empty){
+  let tasks = JSON.parse(localStorage.getItem('tasks'));
+  tasks.splice(index, 1);
+  localStorage.setItem('tasks', JSON.stringify(tasks));
+  if(empty){
+    localStorage.removeItem('tasks');
+  }
 }
 
 function populateList(){
@@ -69,5 +82,4 @@ function populateList(){
       createListItem(task);
     }
   }
-  
 }
