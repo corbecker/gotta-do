@@ -31,10 +31,10 @@ function removeTask(e){
   let taskListItem = e.target.parentElement.parentElement;
   let taskList = [...taskListItem.parentNode.children];
   let taskIndex = taskList.indexOf(taskListItem);
-  removeFromLocalStorage(taskIndex, taskList.length === 1 ? true : false);
 
   //event delegation
-  if(taskListItem.classList.contains('collection-item')){
+  if(e.target.parentElement.classList.contains('delete-item')){
+    removeFromLocalStorage(taskIndex, taskList.length === 1 ? true : false);
     taskListItem.remove();
   }
   
@@ -69,6 +69,8 @@ function removeFromLocalStorage(index, empty){
   let tasks = JSON.parse(localStorage.getItem('tasks'));
   tasks.splice(index, 1);
   localStorage.setItem('tasks', JSON.stringify(tasks));
+
+  //if the local storage is now empty
   if(empty){
     localStorage.removeItem('tasks');
   }
