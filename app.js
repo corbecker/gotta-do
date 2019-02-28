@@ -11,6 +11,8 @@ populateList();
 function loadEventListeners() {
   form.addEventListener('submit', addTask);
   taskList.addEventListener('click', removeTask);
+  clearBtn.addEventListener('click', clearTasks);
+
 }
 
 function addTask(e){
@@ -84,4 +86,11 @@ function populateList(){
       createListItem(task);
     }
   }
+}
+
+function clearTasks(){
+  while(taskList.firstChild){
+    taskList.removeChild(taskList.firstChild);
+  }
+  localStorage.removeItem('tasks');
 }
