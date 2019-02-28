@@ -20,19 +20,17 @@
             <div class="input-field">
               <input type="text" name="task" id="task">
               <label for="task">What needs to be done?</label>
+              <input type="submit" name="submit" value="add" class="btn">
             </div>
-            <a class="btn-floating btn-large waves-effect waves-light red" href="javascript:{}" onclick="document.getElementById('task-form').submit();"><i class="material-icons">add</i></a>
         </form>
-        <div id="main" class="card collection with-header">
+        <div id="main" class="card">
           <div class="card-action">
             <h5 id="task-title">TODO's</h5>
               <div class="input-field col s12">
                 <input type="text" name="filter" id="filter">
                 <label for="filter">Filter Items</label>
               </div>
-              <ul class="collection">
-
-              </ul>
+              <ul class="collection"></ul>
               <a href="#" class="clear-tasks btn ">Clear</a>
           </div>
         </div>
