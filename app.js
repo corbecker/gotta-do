@@ -29,6 +29,7 @@ function addTask(e){
   taskInput.value = '';
 }
 
+//deletes a task from local storage
 function removeTask(e){
   let taskListItem = e.target.parentElement.parentElement;
   let taskList = [...taskListItem.parentNode.children];
@@ -42,24 +43,27 @@ function removeTask(e){
   
 }
 
+// takes a string value and creates a list item
 function createListItem(taskValue){
     //create the new task list item
     const task = document.createElement('li');
     task.className = 'collection-item';
     task.appendChild(document.createTextNode(taskValue));
+
     //create the delete task button
     const link = document.createElement('a');
     link.className = 'delete-item secondary-content';
     link.innerHTML = '<i class="material-icons">close</i>';
     task.appendChild(link);
-  
+
     taskList.appendChild(task);
 }
 
+//adds an item into localstorage
 function addToLocalStorage(task){
   let tasks;
   if(localStorage.getItem('tasks') === null){
-    tasks = []
+    tasks = [];
   }else {
     tasks = JSON.parse(localStorage.getItem('tasks'));
   }
@@ -67,6 +71,9 @@ function addToLocalStorage(task){
   localStorage.setItem('tasks', JSON.stringify(tasks));
 }
 
+/*removes items from local storage based on index in array
+* if the array is empty the item gets removed from local storage
+*/
 function removeFromLocalStorage(index, empty){
   let tasks = JSON.parse(localStorage.getItem('tasks'));
   tasks.splice(index, 1);
@@ -78,6 +85,7 @@ function removeFromLocalStorage(index, empty){
   }
 }
 
+//takes tasks from local storage and creates list items
 function populateList(){
   let tasks;
   if(localStorage.getItem('tasks') !== null){
@@ -88,6 +96,7 @@ function populateList(){
   }
 }
 
+//removes all tasks from local storage
 function clearTasks(){
   while(taskList.firstChild){
     taskList.removeChild(taskList.firstChild);
@@ -95,6 +104,7 @@ function clearTasks(){
   localStorage.removeItem('tasks');
 }
 
+//if the text inputted exists in a list item display it, if not hide it
 function filterTasks(e){
   const text = e.target.value.toLowerCase();
   
